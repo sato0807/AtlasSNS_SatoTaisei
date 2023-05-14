@@ -39,21 +39,23 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function register(Request $request){
-        if($request->isMethod('post')){
+    public function register(RegisterFormRequest $request){
+        //if($request->isMethod('post')){
 
-            $username = $request->input('username');
-            $mail = $request->input('mail');
-            $password = $request->input('password');
+            //$username = $request->input('username');
+            //$mail = $request->input('mail');
+            //$password = $request->input('password');
 
-            User::create([
-                'username' => $username,
-                'mail' => $mail,
-                'password' => bcrypt($password),
-            ]);
+           // User::create([
+                //'username' => $username,
+              //  'mail' => $mail,
+               // 'password' => bcrypt($password),
+          //  ]);
 
-            return redirect('added');
-        }
+        $username = $this->create($data);
+        $user = $request->get('username');
+        return redirect('added')->with('username', $user);
+        //}
         return view('auth.register');
     }
 
