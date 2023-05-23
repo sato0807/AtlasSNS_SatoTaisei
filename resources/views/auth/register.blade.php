@@ -3,6 +3,7 @@
 @section('content')
 <!-- 適切なURLを入力してください -->
 {!! Form::open(['url' => '/register']) !!}
+<!--↑openからcloseまでをweb.phpのpost送信用の「/register」へ送信するという命令-->
 
 <h2>新規ユーザー登録</h2>
 

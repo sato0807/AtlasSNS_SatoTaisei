@@ -2,4 +2,6 @@
 
 @section('content')
 
+<p>フォローリスト</p>
+
 @endsection
