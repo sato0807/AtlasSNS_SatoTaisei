@@ -15,5 +15,24 @@
     </div>
     <button type="submit" class="btn btn-success pull-right"><img src="/images/post.png"></button>
     {!! Form::close() !!}
+
+    @foreach($posts as $post)
+    <tr>
+      <td>{{ $post->user_id }}</td>
+      <td>{{ $post->post }}</td>
+      <td>{{ $post->created_at }}</td>
+
+      <!--投稿の編集ボタン-->
+      <td><div class="content"><a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="/images/edit.png" alt="編集"></a></div></td>
+    </tr>
+    @endforeach
+    <!--モーダルの中身-->
+    <div class="modal js-modal">
+      <div class="modal__bg js-modal-close"></div>
+      <div class="modal__content">
+        <form action="" method=""></form>
+      </div>
+    </div>
+
   </div>
 @endsection
