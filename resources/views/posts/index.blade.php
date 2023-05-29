@@ -18,19 +18,31 @@
 
     @foreach($posts as $post)
     <tr>
-      <td>{{ $post->user_id }}</td>
+      <td>{{ $post->user->username }}</td>
       <td>{{ $post->post }}</td>
       <td>{{ $post->created_at }}</td>
 
       <!--投稿の編集ボタン-->
+      <!-- if文を使ってログイン中のユーザーのみ表示 -->
+      @if ($id == $post->user_id)
       <td><div class="content"><a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="/images/edit.png" alt="編集"></a></div></td>
+      @endif
+      <!-- post属性とpost_id属性を追加し、投稿内容と投稿idのデータを持たせる -->
     </tr>
     @endforeach
-    <!--モーダルの中身-->
+    <!-- モーダル -->
     <div class="modal js-modal">
+      <!-- モーダルの背景（グレー） -->
       <div class="modal__bg js-modal-close"></div>
+      <!-- モーダルの中身 -->
       <div class="modal__content">
-        <form action="" method=""></form>
+        <form action="/top/update" method="post">
+          <textarea name="upPost" class="modal_post"></textarea>
+          <input type="hidden" name="up_id" class="modal_id" value="">
+          <input type="submit" value="更新">
+          {{ csrf_field() }}
+        </form>
+        <a class="js-modal-close" href="">閉じる</a>
       </div>
     </div>
 

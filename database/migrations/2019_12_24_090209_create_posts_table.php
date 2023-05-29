@@ -19,6 +19,10 @@ class CreatePostsTable extends Migration
             $table->string('post',400);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('current_timestamp on update current_timestamp'));
+
+            $table->foreign("user_id")->references("id")->on("users");
+            //リレーション
+            //$table->foreign("この中のカラム")->references("id")->on("idが共通する親のテーブル");
         });
     }
 

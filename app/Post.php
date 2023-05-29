@@ -10,4 +10,10 @@ class Post extends Model
         'user_id', 'post'
     ];
     //値が編集しても良いカラムを指定する
+
+    public function user () {
+        return $this->belongsTo("App\User");
+    }
+    //リレーション
+    //親のデータとつなぐ
 }
