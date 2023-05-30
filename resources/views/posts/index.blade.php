@@ -22,10 +22,13 @@
       <td>{{ $post->post }}</td>
       <td>{{ $post->created_at }}</td>
 
+      <!-- if文を使ってログイン中のユーザーのみ表示
+      @if (ログイン中のユーザーのID == 投稿した人のID) -->
+      @if ($user_id == $post->user_id)
       <!--投稿の編集ボタン-->
-      <!-- if文を使ってログイン中のユーザーのみ表示 -->
-      @if ($id == $post->user_id)
       <td><div class="content"><a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="/images/edit.png" alt="編集"></a></div></td>
+      <!-- 投稿の削除ボタン -->
+      <td><a class="btn btn-danger" href="" onclick="return confirm(この投稿を削除します。よろしいでしょうか？)"><img src="/images/trash.png" alt="削除"></a></td>
       @endif
       <!-- post属性とpost_id属性を追加し、投稿内容と投稿idのデータを持たせる -->
     </tr>
