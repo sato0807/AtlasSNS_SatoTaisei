@@ -16,12 +16,13 @@ class PostsController extends Controller
 {
 
     public function index(){
+        $user_id = Auth::id();
         $posts = Post::get();
         //Post.phpのデータを$postsに変換
         User::with("posts");
         //リレーション
         //親から子へデータを流す
-        return view('posts.index',['posts'=>$posts]);
+        return view('posts.index',['posts'=>$posts, 'user_id'=>$user_id]);
         //['受け渡し先の変数'=>$受け渡す変数]
     }
 
@@ -42,6 +43,11 @@ class PostsController extends Controller
         $post = $request->input('upPost');
         $id = $request->input('up_id');
         Post::where('id', $id)->update(['post' => $post]);
+        return redirect('/top');
+    }
+
+    public function delete($id){
+        Post::where('id', $id)->delete();
         return redirect('/top');
     }
 }

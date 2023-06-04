@@ -40,7 +40,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function register(Request $request){
+    public function register(RegisterFormRequest $request){
         if($request->isMethod('post')){
             //ポスト送信の時（ゲット送信は無視）
 
@@ -69,11 +69,13 @@ class RegisterController extends Controller
         //ゲット送信のみ動くコード
     }
 
-    public function register2(RegisterFormRequest $request){
+    // public function request(RegisterFormRequest $request){
+    //     return view('auth.added', ['msg'=>'OK']);
+    // }
 
-    }
+    // public function added(){
+    //     return view('auth.added');
+    // }
 
-    public function added(){
-        return view('auth.added');
-    }
+    // return view('auth.register', ['error' => $request->message]);
 }

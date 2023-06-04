@@ -34,14 +34,16 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/top','PostsController@index');
   Route::post('/top','PostsController@store');
   Route::post('/top/update','PostsController@update');
+  Route::get('/top/{id}/delete','PostsController@delete');
 
   Route::get('/profile','UsersController@profile');
 
   Route::get('/logout','Auth\LoginController@logout');
 
-  Route::get('/search','UsersController@search');
-
   Route::get('/follow-list','PostsController@follow-list');
+
   Route::get('/follower-list','PostsController@follower-list');
+
+  Route::get('/search','UsersController@search');
 
 });
