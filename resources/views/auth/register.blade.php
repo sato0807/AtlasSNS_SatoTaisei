@@ -25,6 +25,7 @@
 
 {!! Form::close() !!}
 
+<!-- バリデーション処理のエラー文を表示 -->
 @if($errors->any())
   <div class="alert alert-danger mt-3">
     <ul>

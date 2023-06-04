@@ -15,6 +15,7 @@ class RegisterFormRequest extends FormRequest
     public function authorize()
     {
         return true;
+        // 基本「true」
     }
 
     /**
@@ -26,7 +27,7 @@ class RegisterFormRequest extends FormRequest
     {
         return [
             'username' => 'required|string|min:2|max:12',
-            'mail' => 'required|string|min:5|max:40|unique|email',
+            'mail' => 'required|string|min:5|max:40|unique:users,mail|email',
             'password' => 'required|string|alpha-num|min:8|max:20',
             'password_confirmation' =>'required|same:password'
         ];

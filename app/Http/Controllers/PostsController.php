@@ -12,6 +12,8 @@ use App\Post;
 
 use App\User;
 
+use App\Http\Requests\PostsFormRequest;
+
 class PostsController extends Controller
 {
 
@@ -26,7 +28,7 @@ class PostsController extends Controller
         //['受け渡し先の変数'=>$受け渡す変数]
     }
 
-    public function store(Request $request){
+    public function store(PostsFormRequest $request){
         $user_id = Auth::id();
         $user = Auth::user();
         // dd($user->id); 中身の確認とどこでエラーが出ているか見分けられる

@@ -40,9 +40,18 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function register(RegisterFormRequest $request){
+    public function register(){
+        return view('auth.register');
+        //return view('ファイル名');
+        //↑ファイルの画面表示
+        //ゲット送信のみ動くコード
+    }
+
+    public function validation(RegisterFormRequest $request){
+        // FormRequestでバリデーション処理を行いつつ、以下の処理
         if($request->isMethod('post')){
             //ポスト送信の時（ゲット送信は無視）
+            // この記述はなくてもよい
 
             $username = $request->input('username');
             $mail = $request->input('mail');
@@ -63,19 +72,10 @@ class RegisterController extends Controller
             //↑web.phpのRegisterController@addedの処理を行う
             //ここまでポスト送信で動くコード
         }
-        return view('auth.register');
-        //return view('ファイル名');
-        //↑ファイルの画面表示
-        //ゲット送信のみ動くコード
     }
 
-    // public function request(RegisterFormRequest $request){
-    //     return view('auth.added', ['msg'=>'OK']);
-    // }
+    public function added(){
+        return view('auth.added');
+    }
 
-    // public function added(){
-    //     return view('auth.added');
-    // }
-
-    // return view('auth.register', ['error' => $request->message]);
 }

@@ -15,6 +15,15 @@
     </div>
     <button type="submit" class="btn btn-success pull-right"><img src="/images/post.png"></button>
     {!! Form::close() !!}
+    @if($errors->any())
+      <div class="alert alert-danger mt-4">
+        <ul>
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+    @endif
 
     @foreach($posts as $post)
     <tr>
