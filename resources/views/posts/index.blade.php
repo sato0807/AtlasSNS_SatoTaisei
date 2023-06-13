@@ -11,7 +11,7 @@
 
     {!! Form::open(['url' => '/top']) !!}
     <div class="form-group">
-      {!! Form::input('text', 'newPost', null, ['required', 'class' => 'form-control', 'placeholder' => '投稿内容']) !!}
+      {!! Form::input('text', 'newPost', null, ['class' => 'form-control', 'placeholder' => '投稿内容']) !!}
     </div>
     <button type="submit" class="btn btn-success pull-right"><img src="/images/post.png"></button>
     {!! Form::close() !!}

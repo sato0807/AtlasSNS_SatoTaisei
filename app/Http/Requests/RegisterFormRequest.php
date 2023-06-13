@@ -56,19 +56,22 @@ class RegisterFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => '名前を入力してください。',
-            'username.string' => '名前は文字列で入力してください。',
-            'username.min.max' => '名前は2文字以上、12文字以内で入力してください。',
-            'mail.required' => 'メールアドレスを入力してください。',
-            'mail.string' => 'メールアドレスは文字列で入力してください。',
-            'mail.alpha-num' => 'メールアドレスは英数字で入力してください。',
-            'mail.min.max' => 'メールアドレスは5文字以上、40文字以内で入力してください。',
-            'password.required' => 'パスワードを入力してください。',
-            'password.string' => 'パスワードは文字列で入力してください。',
-            'password.alpha-num' => 'パスワードメールアドレスは英数字で入力してください。',
-            'password.min.max' => 'パスワードは8文字以上、20文字以内で入力してください。',
-            'password_confirmation.required' =>'確認用パスワードを入力してください。',
-            'password_confirmation' =>'確認用パスワードはパスワードと同じ文字を入力してください。'
+            'username.required' => ':attributeを入力してください。',
+            'username.string' => ':attributeは文字列で入力してください。',
+            'username.min' => ':attributeは2文字以上で入力してください。',
+            'username.max' => ':attributeは12文字以内で入力してください。',
+            'mail.required' => ':attributeを入力してください。',
+            'mail.string' => ':attributeは文字列で入力してください。',
+            'mail.alpha-num' => ':attributeは英数字で入力してください。',
+            'mail.min' => ':attributeは5文字以上で入力してください。',
+            'mail.max' => ':attributeは40文字以内で入力してください。',
+            'password.required' => ':attributeを入力してください。',
+            'password.string' => ':attributeは文字列で入力してください。',
+            'password.alpha-num' => ':attributeは英数字で入力してください。',
+            'password.min' => ':attributeは8文字以上で入力してください。',
+            'password.max' => ':attributeは20文字以内で入力してください。',
+            'password_confirmation.required' =>':attributeを入力してください。',
+            'password_confirmation.same:password' =>':attributeはパスワードと同じ文字を入力してください。'
         ];
     }
 

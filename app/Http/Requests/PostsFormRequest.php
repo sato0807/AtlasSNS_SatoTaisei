@@ -25,7 +25,8 @@ class PostsFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'post' => 'required|min:1|max:150'
+            // 'name属性' => 'バリデーションの条件'
+            'newPost' => 'required|min:1|max:150'
         ];
     }
 
@@ -35,7 +36,7 @@ class PostsFormRequest extends FormRequest
     public function attributes()
     {
         return [
-            'post' => '投稿'
+            'newPost' => '投稿'
         ];
     }
 
@@ -45,7 +46,9 @@ class PostsFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'post.min.max' => ':attributeは1文字以上、150文字以下で入力してください。'
+            'newPost.required' => ':attributeを入力してください。',
+            'newPost.min' => ':attributeは1文字以上で入力してください。',
+            'newPost.max' => ':attributeは150文字以下で入力してください。'
         ];
     }
 }
