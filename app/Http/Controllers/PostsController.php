@@ -30,13 +30,12 @@ class PostsController extends Controller
 
     public function store(PostsFormRequest $request){
         $user_id = Auth::id();
-        $user = Auth::user();
         // dd($user->id); 中身の確認とどこでエラーが出ているか見分けられる
         //RequestはFormで送信された情報を取得する際使用
         //現在認証しているユーザーを取得
         $post = $request->input('newPost');
         //input()の中はFormタグのname属性（第2引数）
-        Post::create(['user_id' => $user->id,'post' => $post]);
+        Post::create(['user_id' => $user_id,'post' => $post]);
         //'Post'はテーブル名、'post'はカラム名
         return redirect('/top');
     }

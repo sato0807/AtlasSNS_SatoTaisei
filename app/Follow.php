@@ -10,6 +10,4 @@ class Follow extends Model
         'following_id', 'followed_id'
     ];
 
-    //多対多のリレーションのため、中間テーブルを作成
-    protected $table = 'following_followed';
 }

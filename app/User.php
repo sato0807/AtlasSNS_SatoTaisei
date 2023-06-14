@@ -33,17 +33,24 @@ class User extends Authenticatable
         return $this->hasMany("App\Post");
     }
 
-    // 多対多のリレーション
-    // public function 変数(){
-    //     return $this->belongToMany('モデル名', 'テーブル名', 'リレーションを定義しているモデルの外部キー名', '結合するモデルの外部キー名');
+    // フォローする
+    // public function follow(Int $user_id){
+    //     return $this->follows()->attach($user_id);
     // }
-    // フォロワー→フォロー
-    public function followed(){
-        return $this->belongToMany('App\User', 'following_followed', 'followed_id', 'following_id');
+
+    // フォロー解除する
+    // public function unfollow(Int $user_id){
+    //     return $this->follows()->detach($user_id);
+    // }
+
+    // フォローしているか
+    public function isFollowing(Int $user_id){
+        return (boolean) $this->follows()->where('followed_id', $user_id)->first();
     }
 
-    // フォロー→フォロワー
-    public function following(){
-        return $this->belongToMany('App\User', 'following_followed', 'following_id', 'followed_id');
+    // フォローされているか
+    public function isFollowed(Int $user_id){
+        return (boolean) $this->followers()->where('following_id', $user_id)->first();
     }
+
 }

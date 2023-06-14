@@ -2,34 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Follow;
 use App\User;
 
 class FollowsController extends Controller
 {
-    //
-    public function follow(User $user){
-        $follow = Follow::create([
-            // フォローする人のIDを取得=当然認証ユーザー
-            'following_id' => \Auth::user()->id,
-            // フォローされる相手のIDを取得
-            'followed_id' => $user->id
+    // 「フォローする」の処理
+    public function follow($id){
+        // Followテーブルに下記を登録
+        Follow::create([
+            'following_id' => Auth::id(),
+            // search.blade.phpからIDを取得→web.phpを介してIDを送信→フォローされるIDを取得する
+            'followed_id' => $id
         ]);
-        // フォローされているユーザーの数をcountして取得
-        $followCount = count(Follow::where('followed_id', $user->id)->get());
-
-        // 処理したデータをJavaScriptへ渡す
-        // return response()->json(['受け渡し先の変数' => $受け渡す変数]);
-        return response()->json(['followCount' => $followCount]);
+        return redirect('/search');
     }
 
-    // Followインスタンスを取得して削除
-    public function unfollow(User $user){
-        $follow = Follow::where('following_id', \Auth::user()->id)->first();
-        $follow->delete();
-        $followCount = count(Follow::where('followed_id', $user->id)->get());
-
-        return response()->json(['followCount' => $followCount]);
+    // 「フォロー解除」の処理
+    public function unfollow($id){
+        // 'following_id'と'followed_id'に値が入っていればレコード削除
+        Follow::where('following_id', Auth::id())->where('followed_id', $id)->delete();
+        return redirect('/search');
     }
+
 }
