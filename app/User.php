@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->hasMany("App\Post");
     }
 
+    // 多対多のリレーション
+    public function follows(){
+        return $this->belongsToMany("App\Follow");
+    }
+
     // フォローする
     // public function follow(Int $user_id){
     //     return $this->follows()->attach($user_id);

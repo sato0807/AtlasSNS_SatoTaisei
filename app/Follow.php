@@ -10,4 +10,9 @@ class Follow extends Model
         'following_id', 'followed_id'
     ];
 
+    // 多対多のリレーション
+    public function followers(){
+        return $this->belongsToMany("App\User");
+    }
+
 }
