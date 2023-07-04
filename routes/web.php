@@ -37,12 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/top/{id}/delete','PostsController@delete');
 
   Route::get('/profile','UsersController@profile');
+  Route::post('/profile','UsersController@update');
 
   Route::get('/logout','Auth\LoginController@logout');
 
-  Route::get('/follow-list','PostsController@follow-list');
+  Route::get('/follow-list','PostsController@followList');
 
-  Route::get('/follower-list','PostsController@follower-list');
+  Route::get('/follower-list','PostsController@followerList');
 
   Route::get('/search','UsersController@search');
   Route::get('/search/{id}/follow','FollowsController@follow')->name('follow');

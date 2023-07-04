@@ -51,4 +51,8 @@ class PostsController extends Controller
         Post::where('id', $id)->delete();
         return redirect('/top');
     }
+
+    public function followList(){
+        return view('follows.followList');
+    }
 }

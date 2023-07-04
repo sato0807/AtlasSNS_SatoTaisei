@@ -18,6 +18,8 @@
   <!-- ユーザー名の表示 -->
   <td>{{$user->username}}</td>
   <!-- フォローボタンの切り替え -->
+  <!-- if文の条件「フォローIDに自分のIDがある中でフォロワーに$userのIDがあったら」
+  ログインしている人のユーザー情報->このユーザー情報を基にisFollowing()を読み込む -->
   @if(Auth::user()->isFollowing($user->id))
   <td>
     <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\User;
 
+use App\Http\Requests\ProfileFormRequest;
+
 class UsersController extends Controller
 {
 
@@ -23,5 +25,30 @@ class UsersController extends Controller
             $users = User::where('username', '!=', $user_login)->get();
         }
         return view('users.search',['users' => $users, 'search' => $search]);
+    }
+
+    public function profile(Request $request){
+        $user_login = Auth::user()->first();
+
+        return view('users.profile',['user_login' => $user_login]);
+    }
+
+    public function update(ProfileFormRequest $request){
+        $id = Auth::id();
+        $upUsername = $request->input('upUsername');
+        $upMail = $request->input('upMail');
+        $upPassword = $request->input('upPassword');
+        $upBio = $request->input('upBio');
+        $upImages = $request->input('upImages');
+
+        User::where('id', $id)->update([
+            'username' => $upUsername,
+            'mail' => $upMail,
+            'password' => bcrypt($upPassword),
+            'bio' => $upBio,
+            'images' => $upImages
+        ]);
+
+        return redirect('/profile');
     }
 }
