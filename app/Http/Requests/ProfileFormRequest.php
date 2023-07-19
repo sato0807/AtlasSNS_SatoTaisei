@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Support\Facades\Auth;
+
 class ProfileFormRequest extends FormRequest
 {
     /**
@@ -24,13 +26,13 @@ class ProfileFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|string|min:2|max:12',
-            'mail' => 'required|string|min:5|max:40|unique:users,mail,Auth::id();,id|email',
-            // |unique:テーブル名,カラム名,除外したい値,第3引数を適用するカラム名|
-            'password' => 'string|alpha-num|min:8|max:20',
-            'password_confirmation' => 'same:password',
-            'bio' => 'max:150',
-            'images' => 'mimes:jpg,png,bmp,gif,svg'
+            'upUsername' => 'required|string|min:2|max:12',
+            'upMail' => 'required|string|min:5|max:40|unique:users,mail,Auth::id();,id|email',
+            // |unique:テーブル名,カラム名,対象外にしたいデータがあるレコードの主キー,第3引数のカラム名|
+            'upPassword' => 'nullable|string|alpha-num|min:8|max:20',
+            'upPassword_confirmation' => 'same:password',
+            'upBio' => 'max:150',
+            'upImages' => 'mimes:jpg,png,bmp,gif,svg'
         ];
     }
 
@@ -42,12 +44,12 @@ class ProfileFormRequest extends FormRequest
     public function attributes()
     {
         return [
-            'username' => '名前',
-            'mail' => 'メールアドレス',
-            'password' => 'パスワード',
-            'password_confirmation' => '確認用パスワード',
-            'bio' => '自己紹介文',
-            'images' => 'アイコン用の画像'
+            'upUsername' => '名前',
+            'upMail' => 'メールアドレス',
+            'upPassword' => 'パスワード',
+            'upPassword_confirmation' => '確認用パスワード',
+            'upBio' => '自己紹介文',
+            'upImages' => 'アイコン用の画像'
         ];
     }
 
@@ -59,23 +61,23 @@ class ProfileFormRequest extends FormRequest
     public function messages()
     {
         return [
-            'username.required' => ':attributeを入力してください。',
-            'username.string' => ':attributeは文字列で入力してください。',
-            'username.min' => ':attributeは2文字以上で入力してください。',
-            'username.max' => ':attributeは12文字以内で入力してください。',
-            'mail.required' => ':attributeを入力してください。',
-            'mail.string' => ':attributeは文字列で入力してください。',
-            'mail.min' => ':attributeは5文字以上で入力してください。',
-            'mail.max' => ':attributeは40文字以内で入力してください。',
-            'mail.unique' => '登録済み:attributeは使用しないでください。',
-            'mail.email' => ':attributeの形式で入力してください。',
-            'password.string' => ':attributeは文字列で入力してください。',
-            'password.alpha-num' => ':attributeは英数字で入力してください。',
-            'password.min' => ':attributeは8文字以上で入力してください。',
-            'password.max' => ':attributeは20文字以内で入力してください。',
-            'password_confirmation.same:password' =>':attributeはパスワードと同じ文字を入力してください。',
-            'bio.max' => ':attributeは150文字以内で入力してください。',
-            'images.mimes' => ':attributeはjpg,png,bmp,gif,svgのいずれかの形式でアップロードしてください。'
+            'upUsername.required' => ':attributeを入力してください。',
+            'upUsername.string' => ':attributeは文字列で入力してください。',
+            'upUsername.min' => ':attributeは2文字以上で入力してください。',
+            'upUsername.max' => ':attributeは12文字以内で入力してください。',
+            'upMail.required' => ':attributeを入力してください。',
+            'upMail.string' => ':attributeは文字列で入力してください。',
+            'upMail.min' => ':attributeは5文字以上で入力してください。',
+            'upMail.max' => ':attributeは40文字以内で入力してください。',
+            'upMail.unique' => '登録済み:attributeは使用しないでください。',
+            'upMail.email' => ':attributeの形式で入力してください。',
+            'upPassword.string' => ':attributeは文字列で入力してください。',
+            'upPassword.alpha-num' => ':attributeは英数字で入力してください。',
+            'upPassword.min' => ':attributeは8文字以上で入力してください。',
+            'upPassword.max' => ':attributeは20文字以内で入力してください。',
+            'upPassword_confirmation.same:password' =>':attributeはパスワードと同じ文字を入力してください。',
+            'upBio.max' => ':attributeは150文字以内で入力してください。',
+            'upImages.mimes' => ':attributeはjpg,png,bmp,gif,svgのいずれかの形式でアップロードしてください。'
         ];
     }
 
