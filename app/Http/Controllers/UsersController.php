@@ -39,9 +39,11 @@ class UsersController extends Controller
         $upMail = $request->input('upMail');
         $upPassword = $request->input('upPassword');
         $upBio = $request->input('upBio');
-        $upImages = $request->file('upImages')->update('public/images/');
+        $upImages_name = $request->file('upImages')->getClientOriginalName();
+        $upImages = $request->storeAs('', $upImages_name, 'public');
         // 画像の保存
         // $request->file('name')->('任意のディレクトリ');
+        // storeAs('ディスク内のディレクトリー', 'ファイル名', 'ディスク');
 
         User::where('id', $id)->update([
             'username' => $upUsername,

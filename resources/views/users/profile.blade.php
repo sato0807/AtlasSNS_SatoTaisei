@@ -32,7 +32,8 @@
   <!-- アイコン画像 -->
   <div>
     <p>icon image</p>
-    {{ Form::file('upImages',['class' => 'form-control', enctype = 'multipart/form-data'] ) }}
+    {{ Form::file('upImages',['class' => 'form-control', ]) }}
+    <!-- enctype = 'multipart/form-data' -->
   </div>
 
 </div>

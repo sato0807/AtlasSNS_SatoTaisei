@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Request;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 use Illuminate\Support\Facades\Auth;
@@ -23,11 +25,13 @@ class ProfileFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
+        $user_id = Auth::id();
+
         return [
             'upUsername' => 'required|string|min:2|max:12',
-            'upMail' => 'required|string|min:5|max:40|unique:users,mail,Auth::id();,id|email',
+            'upMail' => 'required|string|min:5|max:40|unique:users,mail,$user_id,id|email',
             // |unique:テーブル名,カラム名,対象外にしたいデータがあるレコードの主キー,第3引数のカラム名|
             'upPassword' => 'nullable|string|alpha-num|min:8|max:20',
             'upPassword_confirmation' => 'same:password',
