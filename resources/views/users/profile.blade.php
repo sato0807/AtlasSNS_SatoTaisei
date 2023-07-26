@@ -2,7 +2,9 @@
 
 @section('content')
 
-{{ Form::open(['url' => '/profile']) }}
+{{ Form::open(['url' => '/profile', 'files' => true]) }}
+<!-- file形式の際は「'files' => true」が必要 -->
+<!-- https://laraweb.net/practice/7965/ -->
 <div class="form-group">
   <!-- ユーザー名 -->
   <div>
@@ -32,8 +34,7 @@
   <!-- アイコン画像 -->
   <div>
     <p>icon image</p>
-    {{ Form::file('upImages',['class' => 'form-control', ]) }}
-    <!-- enctype = 'multipart/form-data' -->
+    {{ Form::file('upImages',['class' => 'form-control']) }}
   </div>
 
 </div>

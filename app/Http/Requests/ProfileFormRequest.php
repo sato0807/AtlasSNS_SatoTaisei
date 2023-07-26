@@ -31,8 +31,10 @@ class ProfileFormRequest extends FormRequest
 
         return [
             'upUsername' => 'required|string|min:2|max:12',
-            'upMail' => 'required|string|min:5|max:40|unique:users,mail,$user_id,id|email',
+            'upMail' => 'required|string|min:5|max:40|unique:users,mail,'.$user_id.',id|email',
+            // https://qiita.com/kaitaku/items/d38e9e498b094405dede
             // |unique:テーブル名,カラム名,対象外にしたいデータがあるレコードの主キー,第3引数のカラム名|
+            // '.文字列.'にしなければ変数として認識されない
             'upPassword' => 'nullable|string|alpha-num|min:8|max:20',
             'upPassword_confirmation' => 'same:password',
             'upBio' => 'max:150',

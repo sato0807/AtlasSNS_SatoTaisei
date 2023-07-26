@@ -39,8 +39,6 @@ class UsersController extends Controller
         $upMail = $request->input('upMail');
         $upPassword = $request->input('upPassword');
         $upBio = $request->input('upBio');
-        $upImages_name = $request->file('upImages')->getClientOriginalName();
-        $upImages = $request->storeAs('', $upImages_name, 'public');
         // 画像の保存
         // $request->file('name')->('任意のディレクトリ');
         // storeAs('ディスク内のディレクトリー', 'ファイル名', 'ディスク');
@@ -50,12 +48,10 @@ class UsersController extends Controller
             'mail' => $upMail,
             'password' => bcrypt($upPassword),
             'bio' => $upBio,
-            'images' => $upImages
+            'images' => $upImages_name = $request->file('upImages')->getClientOriginalName()
         ]);
 
-        // 参照
-        // https://qiita.com/___yusuke49/items/9f6f64c7f800b8e77e7d
-        // https://qiita.com/m-kouki/items/97304527533f7dfb6943
+        $upImages = $request->storeAs('public', $upImages_name);
 
         return redirect('/profile');
     }
