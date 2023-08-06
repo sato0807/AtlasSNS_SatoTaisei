@@ -25,7 +25,7 @@
         <h1><a href="/top"><img src="images/atlas.png"></a></h1>
             <div id="">
                 <div id="">
-                    <p>{{session('key')}}さん<img src="images/icon1.png"></p>
+                    <p>{{session('key')}}さん<img src="{{ asset('storage/'.$data->images) }}"></p>
                 <div>
                 <ul>
                     <li><a href="/top">ホーム</a></li>

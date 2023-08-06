@@ -39,9 +39,6 @@ class UsersController extends Controller
         $upMail = $request->input('upMail');
         $upPassword = $request->input('upPassword');
         $upBio = $request->input('upBio');
-        // 画像の保存
-        // $request->file('name')->('任意のディレクトリ');
-        // storeAs('ディスク内のディレクトリー', 'ファイル名', 'ディスク');
 
         User::where('id', $id)->update([
             'username' => $upUsername,
@@ -51,8 +48,17 @@ class UsersController extends Controller
             'images' => $upImages_name = $request->file('upImages')->getClientOriginalName()
         ]);
 
-        $upImages = $request->storeAs('public', $upImages_name);
+        $upImages = $request->file('upImages')->storeAs('', $upImages_name, 'public');
+        // 画像の保存
+        // $request->file('name')->('任意のディレクトリ');
+        // storeAs('フォルダ（パス名）', 'ファイル名', 'ディスク名');
+        // storeAs('', $name, 'public'); storage/app/publicに画像が保存
+        // https://taidanahibi.com/laravel/upload-image/
 
-        return redirect('/profile');
+        $user = new User();
+        $data = $user->create(['images' => $upImages]);
+
+        return view('posts.index', ['data' => $data]);
+        // もしかしたらviewでデータ受け渡しかも
     }
 }
