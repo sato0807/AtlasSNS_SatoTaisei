@@ -28,7 +28,8 @@ class UsersController extends Controller
     }
 
     public function profile(Request $request){
-        $user_login = Auth::user()->first();
+        $user_login = Auth::user();
+        // ddd($user_login);
 
         return view('users.profile',['user_login' => $user_login]);
     }
@@ -46,6 +47,7 @@ class UsersController extends Controller
             'password' => bcrypt($upPassword),
             'bio' => $upBio,
             'images' => $upImages_name = $request->file('upImages')->getClientOriginalName()
+            // DBにファイルデータを指定した名前で更新する
         ]);
 
         $upImages = $request->file('upImages')->storeAs('', $upImages_name, 'public');
@@ -55,10 +57,16 @@ class UsersController extends Controller
         // storeAs('', $name, 'public'); storage/app/publicに画像が保存
         // https://taidanahibi.com/laravel/upload-image/
 
-        $user = new User();
-        $data = $user->create(['images' => $upImages]);
+        return redirect('/top');
+        // Route::get('/top','PostsController@index');
+    }
 
-        return view('posts.index', ['data' => $data]);
-        // もしかしたらviewでデータ受け渡しかも
+    public function otherProfile($id){
+        $users = User::where('id', $id)->get();
+        // usersテーブルのidと$id(user_id)が一致するものを取得
+        // dd($users);
+        $posts = $users->posts()->get();
+        // postsテーブル内で$idが含まれるレコードを取得する
+        dd($posts);
     }
 }

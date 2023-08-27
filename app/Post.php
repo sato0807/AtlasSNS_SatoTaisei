@@ -15,5 +15,7 @@ class Post extends Model
         return $this->belongsTo("App\User");
     }
     //リレーション
-    //親のデータとつなぐ
+    //親のデータとつなぐ(postsからusersへ)
+    // なるべくテーブル名と一致させる
+    // ただし、belongsTo()を用いる際のメソッド名は単数
 }

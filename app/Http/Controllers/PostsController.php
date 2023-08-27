@@ -53,6 +53,20 @@ class PostsController extends Controller
     }
 
     public function followList(){
-        return view('follows.followList');
+        $follows = Auth::user()->follows()->get();
+        $posts = Post::with('user')->whereIn('user_id', Auth::user()->follows()->pluck('followed_id'))->latest()->get();
+        // with('テーブル') リレーションしたテーブルの情報を取得
+        // whereIn('テーブル名.カラム名', [カラム名の値として期待されるもの])
+        // whereIn('user_idの値が', ログインユーザー->フォローしている(Post.php 自分がfollowing_idにあるときのレコード)->followed_idと同じ値)
+        // pluck('バリュー', 'キー') コレクション型のデータから1つの情報だけをそれぞれ取得したい際に使う
+        // latest()->get() 最新のデータから取得
+        // dd($posts);
+        return view('follows.followList', ['follows' => $follows, 'posts' => $posts]);
+    }
+
+    public function followerList(){
+        $followers = Auth::user()->followers()->get();
+        $posts = Post::with('user')->whereIn('user_id', Auth::user()->followers()->pluck('following_id'))->latest()->get();
+        return view('follows.followerList', ['followers' => $followers, 'posts' => $posts]);
     }
 }

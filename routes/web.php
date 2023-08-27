@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 
   Route::get('/profile','UsersController@profile');
   Route::post('/profile','UsersController@update');
+  Route::get('/profile/{id}','UsersController@otherProfile');
 
   Route::get('/logout','Auth\LoginController@logout');
 

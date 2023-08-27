@@ -2,6 +2,8 @@
 
 @section('content')
 
+<!-- if(Auth)で条件分岐
+ログインユーザーかそうでないかで自分プロフィール・相手プロフィールの選別 -->
 {{ Form::open(['url' => '/profile', 'files' => true]) }}
 <!-- file形式の際は「'files' => true」が必要 -->
 <!-- https://laraweb.net/practice/7965/ -->

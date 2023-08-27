@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     // 1対多のリレーション
     // 子のデータとつなぐ
-    public function posts () {
+    public function posts(){
         return $this->hasMany("App\Post");
     }
 

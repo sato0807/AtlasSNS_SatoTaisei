@@ -35,8 +35,8 @@ class ProfileFormRequest extends FormRequest
             // https://qiita.com/kaitaku/items/d38e9e498b094405dede
             // |unique:テーブル名,カラム名,対象外にしたいデータがあるレコードの主キー,第3引数のカラム名|
             // '.文字列.'にしなければ変数として認識されない
-            'upPassword' => 'nullable|string|alpha-num|min:8|max:20',
-            'upPassword_confirmation' => 'same:password',
+            'upPassword' => 'string|alpha-num|min:8|max:20',
+            'upPassword_confirmation' => 'same:upPassword',
             'upBio' => 'max:150',
             'upImages' => 'mimes:jpg,png,bmp,gif,svg'
         ];

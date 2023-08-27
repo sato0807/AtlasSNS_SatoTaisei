@@ -28,6 +28,7 @@
     @foreach($posts as $post)
     <tr>
       <td>{{ $post->user->username }}</td>
+      <!-- usersはPost.phpのリレーションメソッド -->
       <td>{{ $post->post }}</td>
       <td>{{ $post->created_at }}</td>
 
