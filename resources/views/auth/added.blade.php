@@ -3,12 +3,17 @@
 @section('content')
 
 <div id="clear">
-  <p>{{session('key')}}さん</p>
-  <p>ようこそ！AtlasSNSへ！</p>
-  <p>ユーザー登録が完了しました。</p>
-  <p>早速ログインをしてみましょう。</p>
+  <p>{{session('key')}}さん
+  <br>ようこそ！AtlasSNSへ！</p>
+  <p>ユーザー登録が完了しました。
+  <br>早速ログインをしてみましょう。</p>
 
-  <p class="btn"><a href="/login">ログイン画面へ</a></p>
+  {{ Form::open(['url' => '/login']) }}
+  {{ Form::submit('ログイン画面へ') }}
+  {{ Form::close() }}
+
 </div>
 
 @endsection
+
+<!-- <p class="red_btn"><a href="/login">ログイン画面へ</a></p> -->

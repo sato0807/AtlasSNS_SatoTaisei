@@ -2,8 +2,12 @@
 
 @section('content')
 
-<!-- if(Auth)で条件分岐
+<!-- 条件分岐
 ログインユーザーかそうでないかで自分プロフィール・相手プロフィールの選別 -->
+@if(isset($user_login))
+<!-- isset()は()内の値が存在したら正を表す -->
+
+<!-- ログインユーザーのプロフィール -->
 {{ Form::open(['url' => '/profile', 'files' => true]) }}
 <!-- file形式の際は「'files' => true」が必要 -->
 <!-- https://laraweb.net/practice/7965/ -->
@@ -52,6 +56,51 @@
       @endforeach
     </ul>
   </div>
+@endif
+
+<!-- 他のユーザーのプロフィール -->
+@else
+<div>
+  <img src="{{ asset('storage/'.$user->images) }}" width="30px" height="30px" alt="">
+</div>
+<tr>
+  <td>name</td>
+  <td>{{$user->username}}</td>
+</tr>
+<tr>
+  <td>bio</td>
+  <td>{{$user->bio}}</td>
+</tr>
+@if(Auth::user()->isFollowing($user->id))
+<td>
+  <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+    <a class="btn btn-unfollow" href="/profile/{{ $user->id }}/unfollow">フォロー解除</a>
+  </form>
+</td>
+@else
+<td>
+  <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
+    <a class="btn btn-follow" href="/profile/{{ $user->id }}/follow">フォローする</a>
+  </form>
+</td>
+@endif
+
+@foreach($posts as $post)
+<div>
+  <img src="{{ asset('storage/'.$user->images) }}" width="30px" height="30px" alt="">
+</div>
+<tr>
+  <td>{{$user->username}}</td>
+</tr>
+<tr>
+  <td>{{$post->post}}</td>
+  <td>{{$post->updated_at}}</td>
+</tr>
+
+@endforeach
+
 @endif
 
 @endsection

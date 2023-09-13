@@ -14,7 +14,7 @@
 @foreach($users as $user)
 <tr>
   <!-- アイコンの表示 -->
-  <td><img src="/images/icon2.png" alt="ユーザーアイコン"></td>
+  <td><img src="{{ asset('storage/'.$user->images) }}" width="30px" height="30px" alt="ユーザーアイコン"></td>
   <!-- ユーザー名の表示 -->
   <td>{{$user->username}}</td>
   <!-- フォローボタンの切り替え -->

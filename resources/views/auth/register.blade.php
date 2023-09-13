@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- 適切なURLを入力してください -->
-{!! Form::open(['url' => '/register']) !!}
+{{ Form::open(['url' => '/register']) }}
 <!--↑openからcloseまでをweb.phpのpost送信用の「/register」へ送信するという命令-->
 
 <h2>新規ユーザー登録</h2>
@@ -21,9 +21,9 @@
 
 {{ Form::submit('登録') }}
 
-<p><a href="/login">ログイン画面へ戻る</a></p>
+<p class="text_btn"><a href="/login">ログイン画面へ戻る</a></p>
 
-{!! Form::close() !!}
+{{ Form::close() }}
 
 <!-- バリデーション処理のエラー文を表示 -->
 @if($errors->any())

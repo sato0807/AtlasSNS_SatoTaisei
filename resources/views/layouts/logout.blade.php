@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description" content="ページの内容を表す文章" />
   <title></title>
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }} ">
   <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
   <link rel="stylesheet" href="{{ asset('css/logout.css') }} ">
   <!--スマホ,タブレット対応-->
@@ -22,7 +23,7 @@
 <body>
   <header>
     <h1><img src="images/atlas.png"></h1>
-    <p>Social Network Service</p>
+    <p class="title">Social Network Service</p>
   </header>
   <div id="container">
     @yield('content')

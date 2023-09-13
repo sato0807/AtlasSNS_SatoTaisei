@@ -39,6 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
   Route::get('/profile','UsersController@profile');
   Route::post('/profile','UsersController@update');
   Route::get('/profile/{id}','UsersController@otherProfile');
+  Route::get('/profile/{id}/follow','UsersController@follow')->name('follow');
+  Route::get('/profile/{id}/unfollow','UsersController@unfollow')->name('unfollow');
+
 
   Route::get('/logout','Auth\LoginController@logout');
 

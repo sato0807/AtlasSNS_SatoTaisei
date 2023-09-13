@@ -1,10 +1,60 @@
 @charset "UTF-8";
 
-html{
-    height: 100%;
+/* logout.blade.php */
+html {
+    /* height: 100%; */
 }
 
-body{
-    height: 100%;
-    background: #186AC9;
+body {
+    /* height: 100%; */
+    min-height: 100vh;
+    background: linear-gradient(180deg, #186AC9 0%, #FFFF00 100%);
+    background-repeat: no-repeat;
+}
+
+header {
+    text-align: center;
+    margin-top: 20%;
+}
+
+p {
+    color: #fff;
+    text-align: center;
+}
+
+.title {
+    font-size: 30px;
+}
+
+
+
+
+/* login.blade.php */
+.welcome {
+    font-size: 18px;
+}
+
+.input {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+}
+
+label[for='mail address'] {
+    position: relative;
+    left: 260px;
+    color: #fff;
+    display: block;
+}
+
+label[for='password'] {
+    position: relative;
+    left: 260px;
+    color: #fff;
+    display: block;
+}
+
+.login_btn {
+    position: relative;
+    left: 360px;
 }

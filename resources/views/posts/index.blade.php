@@ -27,6 +27,7 @@
 
     @foreach($posts as $post)
     <tr>
+      <td><img src="{{ asset('storage/'.$post->user->images) }}" width="30px" height="30px" alt="ユーザーアイコン"></td>
       <td>{{ $post->user->username }}</td>
       <!-- usersはPost.phpのリレーションメソッド -->
       <td>{{ $post->post }}</td>

@@ -10,19 +10,24 @@ use App\User;
 
 use App\Http\Requests\ProfileFormRequest;
 
+use App\Post;
+
+use App\Follow;
+
 class UsersController extends Controller
 {
 
     public function search(Request $request){
         // 現在認証しているユーザー名を取得
-        $user_login = Auth::user();
+        $user_login = Auth::id();
         $search = $request->input('keyword');
         // 現在認証しているユーザー名以外を取得し、あいまい検索をかける
         // ->get();かfirst();を入れることでそのレコード（行）のデータを取得し、表示ができる
         if (isset($search)) {
-            $users = User::where('username', '!=', $user_login)->where('username', 'LIKE', "%$search%")->get();
+            $users = User::where('id', '<>', $user_login)->where('username', 'LIKE', "%$search%")->get();
+            // dd($user_login);
         } else {
-            $users = User::where('username', '!=', $user_login)->get();
+            $users = User::where('id', '!=', $user_login)->get();
         }
         return view('users.search',['users' => $users, 'search' => $search]);
     }
@@ -62,11 +67,33 @@ class UsersController extends Controller
     }
 
     public function otherProfile($id){
-        $users = User::where('id', $id)->get();
+        $user = User::where('id', $id)->first();
         // usersテーブルのidと$id(user_id)が一致するものを取得
-        // dd($users);
-        $posts = $users->posts()->get();
+        // get();だと#items: array:1 [▶]になり、配列で取得してしまうため、1つだけの時はfirst();で直接取得する
+        // dd($user);
+        $posts = Post::where('user_id', $id)->latest()->get();
         // postsテーブル内で$idが含まれるレコードを取得する
-        dd($posts);
+        // dd($posts);
+
+        return view('users.profile', ['user' => $user, 'posts' => $posts]);
+    }
+
+    public function follow($id){
+        $user = User::where('id', $id)->first();
+        $posts = Post::where('user_id', $id)->latest()->get();
+        Follow::create([
+            'following_id' => Auth::id(),
+            'followed_id' => $id
+        ]);
+
+        return view('users.profile', ['user' => $user, 'posts' => $posts]);
+    }
+
+    public function unfollow($id){
+        $user = User::where('id', $id)->first();
+        $posts = Post::where('user_id', $id)->latest()->get();
+        Follow::where('following_id', Auth::id())->where('followed_id', $id)->delete();
+
+        return view('users.profile', ['user' => $user, 'posts' => $posts]);
     }
 }
