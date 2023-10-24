@@ -7,6 +7,141 @@ body {}
 /* header */
 header {
     background: #186AC9;
+    display: flex;
+    justify-content: space-between;
+    /* 並列で均等配置（左右隙間なし=space-between） */
+}
+
+a {
+    text-decoration: none;
+    width: 100%;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #fff;
+    width: 100%;
+}
+
+h1 {
+    width: 10%;
+    display: inline-block;
+    /* これによりheaderとのmargin相殺を防ぎ、変な余白ができないように整える */
+    margin: 1rem;
+}
+
+.atlas_img {
+    width: 100%;
+}
+
+.login_user {
+    display: flex;
+    /* 横並び */
+    align-items: center;
+    /* flexを上下中央揃え */
+    margin: 0 1rem;
+}
+
+.username {
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 0 1rem;
+}
+
+/* アコーディオンメニュー */
+.menu_outer {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 1rem;
+    overflow: hidden;
+}
+
+/* .menu_index {
+    width: 50px;
+    padding: 5px;
+    display: flex; */
+/* 要素を横並び */
+/* align-items: center; */
+/* 子要素を縦の真ん中に配置 */
+/* position: relative; */
+/* 親要素 */
+/* z-index: 2; */
+/* 重なり準: 下から2番目; */
+/* overflow: hidden;
+    cursor: pointer;
+} */
+
+/* ボタン機能 */
+.toggle_btn {
+    width: 1.2rem;
+    height: 1.2rem;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+
+/* ボタン機能の後に配置
+くの字 */
+.toggle_btn::after {
+    content: '';
+    width: 1rem;
+    height: 1rem;
+    border-top: solid #fff;
+    border-right: solid #fff;
+    position: absolute;
+    left: 0.1rem;
+    transform: rotate(135deg);
+    transition: transform .2s;
+}
+
+/* くの字を上向きに変更 */
+.toggle_btn.active::after {
+    top: 45%;
+    transform: rotate(-45deg);
+}
+
+.menu_container {
+    font-size: 1.5rem;
+    text-align: center;
+    border: solid 0.1rem;
+    background-color: #fff;
+    width: 20%;
+    padding: 0;
+    position: absolute;
+    top: 12.5%;
+    right: 0;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: .4s;
+}
+
+.menu_container li {
+    width: 100%;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.menu_container li:hover {
+    background-color: #0f4480;
+}
+
+.menu_container li a {
+    color: #727272;
+}
+
+/* ボタンのどこの範囲をクリックしても色が変わる */
+.menu_container li:hover a {
+    color: #fff;
+}
+
+.image {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    /* 縦横比率を維持しながら、コンテナ全体を覆うように画像が拡大・縮小される */
+    margin: 0 1rem;
 }
 
 /* main content */
@@ -19,9 +154,69 @@ header {
     flex: 0 0 80%;
 }
 
+/* index.blade.php */
+.post_form {
+    display: flex;
+    margin: 2rem;
+}
+
+.btn_post {
+    padding: 0;
+}
+
+/* side bar */
 #side-bar {
-    flex: 0 0 19%;
-    border-left: 1px solid #727272;
+    flex: 0 0 20%;
+    border-left: 0.1rem solid #727272;
+}
+
+#count_confirm {
+    padding: 1rem;
+    border-bottom: 0.1rem solid #727272;
+}
+
+.follow_count {
+    display: flex;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.follower_count {
+    display: flex;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.follow_count_title {
+    width: 30%;
+}
+
+.follow_count_result {
+    width: 10%;
+    text-align: right;
+}
+
+.btn_follow_list {
+    width: 60%;
+    margin: 2.5rem 0 0 auto;
+}
+
+.btn_follow_list a {
+    color: #fff;
+}
+
+#search_confirm {
+    display: flex;
+    justify-content: center;
+}
+
+.search_btn {
+    width: 60%;
+    margin: 2.5rem auto;
+}
+
+.search_btn a {
+    color: #fff;
 }
 
 /* モーダル */

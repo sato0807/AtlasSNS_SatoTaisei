@@ -1,12 +1,9 @@
 @charset "UTF-8";
 
 /* logout.blade.php */
-html {
-    /* height: 100%; */
-}
+html {}
 
 body {
-    /* height: 100%; */
     min-height: 100vh;
     background: linear-gradient(180deg, #186AC9 0%, #FFFF00 100%);
     background-repeat: no-repeat;
@@ -17,44 +14,106 @@ header {
     margin-top: 20%;
 }
 
-p {
-    color: #fff;
-    text-align: center;
+h1 {
+    width: 50%;
+    margin: auto;
+    display: block;
+}
+
+img {
+    width: 150px;
 }
 
 .title {
-    font-size: 30px;
+    color: #fff;
+    font-size: 35px;
 }
 
 
 
 
 /* login.blade.php */
-.welcome {
-    font-size: 18px;
+.login_form_area {
+    background-color: #333;
+    background-color: rgba(40, 39, 39, 0.5);
+    /* 半透明を指定rgba(red, green, blue,0~1); */
+    border-radius: 10px;
+    /* 丸角 */
+    width: 300px;
+    margin: 0 auto;
+    /* margin: 上下(余白なし) 左右(余白の自動算出); */
+    padding: 20px;
+    /* padding: 0;の場合は余白なし */
 }
 
-.input {
-    position: relative;
-    display: block;
+h2 {
+    color: #fff;
+    /* font-weight: lighter; */
+    /* 文字の太さ: 一段階細く; */
+    font-size: 20px;
+    letter-spacing: 0.15em;
+    /* 文字間隔の調整 */
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.login_form_input {
     margin: 0 auto;
 }
 
-label[for='mail address'] {
-    position: relative;
-    left: 260px;
-    color: #fff;
+.input {
+    width: 100%;
+    border-radius: 10px;
     display: block;
+    padding: 10px 0;
 }
 
-label[for='password'] {
-    position: relative;
-    left: 260px;
+label {
     color: #fff;
     display: block;
+    margin: 20px auto 0 0;
 }
 
 .login_btn {
-    position: relative;
-    left: 360px;
+    font-size: 20px;
+    width: 50%;
+    display: block;
+    margin: 20px 0 0 auto;
+}
+
+.text_btn {
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin: 40px auto 20px auto;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* register.blade.php */
+.register_btn {
+    font-size: 20px;
+    width: 50%;
+    display: block;
+    margin: 20px 0 0 auto;
+}
+
+/* register.blade.php */
+.login_success {
+    color: #fff;
+    font-size: 20px;
+}
+
+.added_btn {
+    font-size: 18px;
+    width: 50%;
+    display: block;
+    margin: 20px auto;
 }

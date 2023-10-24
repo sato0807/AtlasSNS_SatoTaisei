@@ -1,3 +1,37 @@
+// アコーディオンメニュー
+// トグルボタン要素を取得
+const toggleBtn = document.querySelector('.toggle_btn');
+// メニューのul要素を取得
+const menuContainer = document.querySelector('.menu_container');
+// ul要素の縦幅を取得して、translateYで上に移動させておく
+// (clientHeightはborder幅を含めないので、borderの幅を足す)
+const menuContainerHeight = menuContainer.clientHeight;
+// トグルボタンがクリックされたらトグルボタン要素にactiveクラスを付けたり外したりする
+toggleBtn.addEventListener('click', () => {
+  toggleBtn.classList.toggle('active');
+  // ul要素にacitveクラスが含まれていなければクラスを付与し、transformで移動
+  if (!menuContainer.classList.contains("active")) {
+    menuContainer.classList.add("active");
+    // opacityで隠しておいたメニューを表示（以降、opactyは1のままで良い）
+    menuContainer.style.cssText = `
+      opacity: 1;
+      pointer-events: auto;
+      `
+    // クリックした際に機能を有効にする
+  } else {
+    // そうでない場合はactiveクラスを外してtransformで移動
+    menuContainer.classList.remove("active");
+    menuContainer.style.cssText = `
+      opacity: 0;
+      pointer-events: none;
+      `
+    // クリックした際に機能を無効にする
+  }
+});
+// https://junpei-sugiyama.com/accordion/
+// https://web-de-asobo.net/2023/06/01/accordion-menu/
+
+
 $(function () {
   // 編集ボタン(class="js-modal-open")が押されたら発火
   $('.js-modal-open').on('click', function () {

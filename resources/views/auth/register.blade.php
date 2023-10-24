@@ -1,39 +1,42 @@
 @extends('layouts.logout')
 
 @section('content')
-<!-- 適切なURLを入力してください -->
-{{ Form::open(['url' => '/register']) }}
-<!--↑openからcloseまでをweb.phpのpost送信用の「/register」へ送信するという命令-->
 
-<h2>新規ユーザー登録</h2>
+<div class="login_form_area">
+  <!-- 適切なURLを入力してください -->
+  {{ Form::open(['url' => '/register']) }}
+  <!--↑openからcloseまでをweb.phpのpost送信用の「/register」へ送信するという命令-->
 
-{{ Form::label('ユーザー名') }}
-{{ Form::text('username',null,['class' => 'input']) }}
+  <h2>新規ユーザー登録</h2>
 
-{{ Form::label('メールアドレス') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
+  {{ Form::label('user name') }}
+  {{ Form::text('username',null,['class' => 'input']) }}
 
-{{ Form::label('パスワード') }}
-{{ Form::text('password',null,['class' => 'input']) }}
+  {{ Form::label('mail address') }}
+  {{ Form::text('mail',null,['class' => 'input']) }}
 
-{{ Form::label('パスワード確認') }}
-{{ Form::text('password_confirmation',null,['class' => 'input']) }}
+  {{ Form::label('password') }}
+  {{ Form::password('password',['class' => 'input']) }}
 
-{{ Form::submit('登録') }}
+  {{ Form::label('password confirm') }}
+  {{ Form::password('password_confirmation',['class' => 'input']) }}
 
-<p class="text_btn"><a href="/login">ログイン画面へ戻る</a></p>
+  {{ Form::submit('REGISTER',['class' => 'btn btn-danger register_btn']) }}
 
-{{ Form::close() }}
+  <p class="text_btn"><a href="/login">ログイン画面に戻る</a></p>
 
-<!-- バリデーション処理のエラー文を表示 -->
-@if($errors->any())
-  <div class="alert alert-danger mt-3">
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  </div>
-@endif
+  {{ Form::close() }}
+
+  <!-- バリデーション処理のエラー文を表示 -->
+  @if($errors->any())
+    <div class="alert alert-danger mt-3">
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
+  @endif
+</div>
 
 @endsection

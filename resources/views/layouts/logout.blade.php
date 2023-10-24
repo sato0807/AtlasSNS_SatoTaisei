@@ -6,8 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="description" content="ページの内容を表す文章" />
   <title></title>
-  <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }} ">
+  <!-- 適用されるCSSの優先順位は下>上 -->
   <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
+  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }} ">
   <link rel="stylesheet" href="{{ asset('css/logout.css') }} ">
   <!--スマホ,タブレット対応-->
   <meta name="viewport" content="width=device-width,initial-scale=1" />

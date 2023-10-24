@@ -2,14 +2,15 @@
 
 @section('content')
 
-<div id="clear">
-  <p>{{session('key')}}さん
-  <br>ようこそ！AtlasSNSへ！</p>
-  <p>ユーザー登録が完了しました。
-  <br>早速ログインをしてみましょう。</p>
+<div class="login_form_area">
+
+  <h2>{{session('key')}}さん
+  <br>ようこそ！AtlasSNSへ！</h2>
+  <p class="login_success">ユーザー登録が完了いたしました。
+  <br>早速ログインをしてみましょう！</p>
 
   {{ Form::open(['url' => '/login']) }}
-  {{ Form::submit('ログイン画面へ') }}
+  {{ Form::submit('ログイン画面へ',['class' => 'btn btn-danger added_btn']) }}
   {{ Form::close() }}
 
 </div>

@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="ページの内容を表す文章" />
     <title></title>
+    <!-- 適用されるCSSの優先順位は下>上 -->
     <link rel="stylesheet" href="{{ asset('css/reset.css') }} ">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }} ">
     <link rel="stylesheet" href="{{ asset('css/style.css') }} ">
     <!--スマホ,タブレット対応-->
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -21,39 +23,44 @@
 </head>
 <body>
     <header>
-        <div id = "head">
-        <h1><a href="/top"><img src="images/atlas.png" alt=""></a></h1>
-            <div id="">
-                <div id="">
-                    <p>{{ Auth::user()->username }}さん<img src="{{ asset('storage/'.Auth::user()->images) }}" width="30px" height="30px" alt=""></p>
-                <div>
-                <ul>
+        <h1><a href="/top"><img class="atlas_img" src="images/atlas.png" alt="Atlas"></a></h1>
+        <div class="login_user">
+            <p class="username">{{ Auth::user()->username }} さん</p>
+            <!-- アコーディオンメニュー -->
+            <nav class="menu_outer">
+                <!-- クリック部分 -->
+                <div class="toggle_btn"></div>
+                <!-- 中身 -->
+                <ul class="menu_container">
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール編集</a></li>
                     <li><a href="/logout">ログアウト</a></li>
                 </ul>
-            </div>
-        </div>
+            </nav>
+            <img class="image" src="{{ asset('storage/'.Auth::user()->images) }}" alt="image">
+        <div>
     </header>
     <div id="row">
         <div id="container">
             @yield('content')
         </div >
         <div id="side-bar">
-            <div id="confirm">
+            <div id="count_confirm">
                 <p>{{ Auth::user()->username }}さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <p>{{ Auth::user()->follows()->count() }}名</p>
+                <div class="follow_count">
+                    <p class="follow_count_title">フォロー数</p>
+                    <p class="follow_count_result">{{ Auth::user()->follows()->count() }}名</p>
+                    <button type="submit" class="btn btn-primary btn_follow_list"><a href="/follow-list">フォローリスト</a></button>
                 </div>
-                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <p>{{ Auth::user()->followers()->count() }}名</p>
+                <div class="follower_count">
+                    <p class="follow_count_title">フォロワー数</p>
+                    <p class="follow_count_result">{{ Auth::user()->followers()->count() }}名</p>
+                    <button type="submit" class="btn btn-primary btn_follow_list"><a href="/follower-list">フォロワーリスト</a></button>
                 </div>
-                <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="/search">ユーザー検索</a></p>
+            <div id="search_confirm">
+                <button type="submit" class="btn btn-primary search_btn"><a href="/search">ユーザー検索</a></button>
+            </div>
         </div>
     </div>
     <footer>
