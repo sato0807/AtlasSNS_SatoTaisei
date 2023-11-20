@@ -9,13 +9,13 @@
     https://yuyafukuda.com/laravel-posting-function/-->
 
     <div class="post_form">
-      <img class="image" src="{{ asset('storage/'.Auth::user()->images) }}" alt="image">
       {!! Form::open(['url' => '/top']) !!}
         <div class="form_group">
-          {!! Form::input('text', 'newPost', null, ['class' => 'form-control', 'placeholder' => '投稿内容']) !!}
+          <img class="image" src="{{ asset('storage/'.Auth::user()->images) }}" alt="image">
+          {!! Form::input('text', 'newPost', null, ['class' => 'form_control', 'placeholder' => '投稿内容']) !!}
+          <button type="submit" class="btn_post"><img src="/images/post.png"></button>
         </div>
       {!! Form::close() !!}
-      <button type="submit" class="btn_post" img src="/images/post.png"></button>
       @if($errors->any())
         <div class="alert alert-danger mt-4">
           <ul>
@@ -27,26 +27,34 @@
       @endif
     </div>
 
-    <div class="post_list">
+    <div class="posts_list">
       @foreach($posts as $post)
-        <tr>
-          <td><img src="{{ asset('storage/'.$post->user->images) }}" width="30px" height="30px" alt="ユーザーアイコン"></td>
-          <td>{{ $post->user->username }}</td>
-          <!-- usersはPost.phpのリレーションメソッド -->
-          <td>{{ $post->post }}</td>
-          <td>{{ $post->created_at }}</td>
+        <div class="post">
+          <div class="post_contents">
+            <img class="image" src="{{ asset('storage/'.$post->user->images) }}" alt="ユーザーアイコン">
+            <div class="post_sentence">
+              <p class="post_username">{{ $post->user->username }}</p>
+              <!-- usersはPost.phpのリレーションメソッド -->
+              <p class="post_post">{{ $post->post }}</p>
+            </div>
+            <p class="post_created_at">{{ $post->created_at }}</p>
+          </div>
 
           <!-- if文を使ってログイン中のユーザーのみ表示
           (ログイン中のユーザーのID == 投稿した人のID) -->
           <!-- post属性とpost_id属性を追加し、投稿内容と投稿idのデータを持たせる -->
           @if ($user_id == $post->user_id)
-            <!--投稿の編集ボタン-->
-            <td><div class="content"><a class="js-modal-open" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="/images/edit.png" alt="編集"></a></div></td>
-            <!-- 投稿の削除ボタン -->
-            <!-- hrefにリンクをどのデータか指定の上記述し、Controllerで削除機能を追加する -->
-            <td><a class="btn btn-danger" href="/top/{{ $post->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')"><img src="/images/trash.png" alt="削除"></a></td>
+            <div class="btn_contents">
+              <!--投稿の編集ボタン-->
+              <a class="js-modal-open btn_edit" href="" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="/images/edit.png" alt="編集"></a>
+              <!-- 投稿の削除ボタン -->
+              <!-- hrefにリンクをどのデータか指定の上記述し、Controllerで削除機能を追加する -->
+              <a class="btn_delete" href="/top/{{ $post->id }}/delete" onclick="return confirm('この投稿を削除します。よろしいでしょうか？')">
+              <!-- <img src="/images/trash.png" alt="削除"> -->
+              </a>
+            </div>
           @endif
-        </tr>
+        </div>
       @endforeach
     </div>
 
@@ -59,10 +67,10 @@
         <form action="/top/update" method="post">
           <textarea name="upPost" class="modal_post"></textarea>
           <input type="hidden" name="up_id" class="modal_id" value="">
-          <input type="submit" value="更新">
+          <input class="modal_edit" type="submit">
           {{ csrf_field() }}
         </form>
-        <a class="js-modal-close" href="">閉じる</a>
+        <!-- <a class="js-modal-close" href="">閉じる</a> -->
       </div>
     </div>
 

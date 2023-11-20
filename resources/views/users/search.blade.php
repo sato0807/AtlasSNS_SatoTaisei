@@ -2,40 +2,41 @@
 
 @section('content')
 
-<form action="/search" method="get">
-  <input type="search" name="keyword" value="{{ $search }}" placeholder="ユーザー名">
-  <button type="submit" class="btn btn-success"><img src="/images/search.png" alt="検索"></button>
-</form>
-
-@if (isset($search))
-<p>検索ワード：{{ $search }}</p>
-@endif
-
-@foreach($users as $user)
-<tr>
-  <!-- アイコンの表示 -->
-  <td><img src="{{ asset('storage/'.$user->images) }}" width="30px" height="30px" alt="ユーザーアイコン"></td>
-  <!-- ユーザー名の表示 -->
-  <td>{{$user->username}}</td>
-  <!-- フォローボタンの切り替え -->
-  <!-- if文の条件「フォローIDに自分のIDがある中でフォロワーに$userのIDがあったら」
-  ログインしている人のユーザー情報->このユーザー情報を基にisFollowing()を読み込む -->
-  @if(Auth::user()->isFollowing($user->id))
-  <td>
-    <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
-      {{ csrf_field() }}
-      {{ method_field('DELETE') }}
-      <a class="btn btn-unfollow" href="/search/{{ $user->id }}/unfollow">フォロー解除</a>
+  <div class="search_form">
+    <form action="/search" method="get" >
+      <input type="search" class="search_form_frame" name="keyword" value="{{ $search }}" placeholder="ユーザー名">
+      <button type="submit" class="btn_search"><img src="/images/search.png" alt="検索"></button>
     </form>
-  </td>
-  @else
-  <td>
-    <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
-      <a class="btn btn-follow" href="/search/{{ $user->id }}/follow">フォローする</a>
-    </form>
-  </td>
-  @endif
-</tr>
-@endforeach
+    @if (isset($search))
+      <p class="search_word">検索ワード：{{ $search }}</p>
+    @endif
+  </div>
 
-@endsection
+  <div class="other_users_list">
+    @foreach($users as $user)
+    <div class="other_user">
+        <!-- アイコンの表示 -->
+        <img class="image" src="{{ asset('storage/'.$user->images) }}" alt="ユーザーアイコン">
+        <!-- ユーザー名の表示 -->
+        <p class="search_username">{{$user->username}}</p>
+        <!-- フォローボタンの切り替え -->
+        <!-- if文の条件「フォローIDに自分のIDがある中でフォロワーに$userのIDがあったら」
+        ログインしている人のユーザー情報->このユーザー情報を基にisFollowing()を読み込む -->
+        <div class="follow_select">
+          @if(Auth::user()->isFollowing($user->id))
+          <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST" class="btn btn-danger btn_unfollow">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <a href="/search/{{ $user->id }}/unfollow">フォロー解除</a>
+          </form>
+          @else
+          <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST" class="btn btn-primary btn_follow">
+            <a href="/search/{{ $user->id }}/follow">フォローする</a>
+          </form>
+          @endif
+        </div>
+      </div>
+      @endforeach
+    </div>
+
+    @endsection

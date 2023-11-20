@@ -23,7 +23,8 @@
 </head>
 <body>
     <header>
-        <h1><a href="/top"><img class="atlas_img" src="images/atlas.png" alt="Atlas"></a></h1>
+        <h1><a href="/top"><img class="atlas_img" src="{{ asset('images/atlas.png') }}" alt="Atlas"></a></h1>
+        <!-- src="{{ asset('publicの中') }}"で記述しないと正常に表示できない場合ある -->
         <div class="login_user">
             <p class="username">{{ Auth::user()->username }} さん</p>
             <!-- アコーディオンメニュー -->
@@ -66,6 +67,6 @@
     <footer>
     </footer>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>
