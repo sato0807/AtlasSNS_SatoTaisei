@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run(Request $request)
+    public function run()
     {
         //
         DB::table('users')->insert([
@@ -30,7 +30,30 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('orange3333')
         ]);
 
-        $username->input('username');
-        $request->session()->put('key', $username);
+        // $username->input('username');
+        // $request->session()->put('key', $username);
     }
+
+    // public function run(Request $request)
+    // {
+    //     //
+    //     DB::table('users')->insert([
+    //         'username' => 'れもん',
+    //         'mail' => 'lemon@gmail.com',
+    //         'password' => bcrypt('lemon1111')
+    //     ]);
+    //     DB::table('users')->insert([
+    //         'username' => 'りんご',
+    //         'mail' => 'apple@gmail.com',
+    //         'password' => bcrypt('apple2222')
+    //     ]);
+    //     DB::table('users')->insert([
+    //         'username' => 'みかん',
+    //         'mail' => 'orange@gmail.com',
+    //         'password' => bcrypt('orange3333')
+    //     ]);
+
+    //     $username->input('username');
+    //     $request->session()->put('key', $username);
+    // }
 }
